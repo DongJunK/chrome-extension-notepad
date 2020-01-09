@@ -1,0 +1,38 @@
+{
+    "name": "notepad",
+    "version": "1.0",
+    "description": "Build an Extension!",
+    "permissions": [
+        "contextMenus",
+        "tabs",
+        "activeTab"
+    ],
+    "background": {
+        "scripts": ["contextMenus.js"],
+        "persistent": false
+    },
+    "content_script":[
+        {
+            "matches": ["http://*/*","https://*/*"],
+            "js":["memo_script.js"]
+        }
+    ],
+    "web_accessible_resources": ["popup.html"],
+    "browser_action": {
+        "default_popup": "popup.html",
+        "default_title": "Chrome NotePad",
+        "default_icon": {
+          "16": "images/note_icon16.png",
+          "32": "images/note_icon32.png",
+          "64": "images/note_icon64.png",
+          "128": "images/note_icon128.png"
+        }
+    },
+    "icons": {
+        "16": "images/note_icon16.png",
+        "32": "images/note_icon32.png",
+        "64": "images/note_icon64.png",
+        "128": "images/note_icon128.png"
+    },
+    "manifest_version": 2
+}
