@@ -7,10 +7,7 @@ var id = chrome.contextMenus.create({
 
 function connect(){
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-        console.log("tabs : \n",tabs);
-        console.log("tabs[0] : \n",tabs[0]);
-        console.log("tabs[0].id : ",tabs[0].id);
-        const port = chrome.tabs.connect(tabs[0].id);
+        var port = chrome.tabs.connect(tabs[0].id);
         console.log(port);
         port.postMessage({ connect:"true" });
         port.onMessage.addListener((response) => {
