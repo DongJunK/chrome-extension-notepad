@@ -8,13 +8,13 @@
         "activeTab"
     ],
     "background": {
-        "scripts": ["contextMenus.js"],
+        "scripts": ["js/contextMenus.js"],
         "persistent": false
     },
     "content_scripts":[
         {
             "matches": ["http://*/*","https://*/*"],
-            "js":["memo_script.js"]
+            "js":["js/memo_script.js"]
         }
     ],
     "browser_action": {
