@@ -1,0 +1,71 @@
+<!Doctype html>
+<html>
+
+<body style="min-width:200px; min-height:200px;">
+    <p>
+        <p style="min-width: 10px;">Font Size</p>
+        <select id="select_font_size">
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option selected="selected">10</option>
+            <option>11</option>
+            <option>12</option>
+            <option>13</option>
+            <option>14</option>
+            <option>15</option>
+            <option>16</option>
+            <option>17</option>
+            <option>18</option>
+            <option>19</option>
+            <option>20</option>
+        </select>
+    </p>
+    <p>
+        <p style="min-width: 10px;">FontFamily</p>
+        <select id="select_font_family">
+            <option>san_serif</option>
+            <option>Impact</option>
+            <option>Times New Roman</option>
+        </select>
+    </p>
+    <p>
+        <p style="min-width: 10px;">Font Color</p>
+        <select id="select_font_color">
+            <option>black</option>
+            <option>red</option>
+            <option>blue</option>
+            <option>green</option>
+            <option>yellow</option>
+        </select>
+    </p>
+    <button id="ok_button" onclick="connect">OK</button>
+
+    <script>
+
+        // connect memo_script.js
+        function connect(){
+            console.log("aaaaa");
+            chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+                var port = chrome.tabs.connect(tabs[0].id);
+                console.log("connect");
+                var font_size = document.getElementById("select_font_size");
+                console.log(font_size);
+                var font_family = document.getElementById("select_font_family");
+                var font_color = document.getElementById("select_font_color");
+                port.postMessage({ connect:"popup", fontSize:font_size, font:font_family, color:font_color});
+                port.onMessage.addListener((response) => {
+                    if(response.result==="success"){
+                        console.log("success");
+                    }
+                });
+            });
+        }
+        
+    </script>
+</body>
+
+
+
+</html>
