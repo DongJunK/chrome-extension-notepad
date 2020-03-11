@@ -9,7 +9,7 @@ var id = chrome.contextMenus.create({
 var gPos;
 
 // gPos add right menu location 
-chrome.extension.onMessage.addListener(function(msg, sender, sendResponse) {
+chrome.extension.onMessage.addListener((msg)=> {
     if (msg.from == 'mouseup') {
         //storing position
         gPos = msg.point;
@@ -20,10 +20,9 @@ chrome.extension.onMessage.addListener(function(msg, sender, sendResponse) {
 function connect(){
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         var port = chrome.tabs.connect(tabs[0].id);
-        console.log(gPos);
-        port.postMessage({ connect:"true",gPos:gPos});
+        port.postMessage({ connect:"context_menus",gPos:gPos});
         port.onMessage.addListener((response) => {
-            if(response.result==="true"){
+            if(response.result==="success"){
                 console.log("success");
             }
         });
@@ -31,7 +30,7 @@ function connect(){
 }
 
 // right menu event listener
-chrome.contextMenus.onClicked.addListener(function(info) {
+chrome.contextMenus.onClicked.addListener((info)=>{
     if (info.menuItemId == "add-memo") {
         connect();
     }
