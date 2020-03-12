@@ -88,7 +88,7 @@ function addCss() {
     return css;
 }
 
-function newButton() {
+function newButton(pointX, pointY) {
     alert(count);
     if(count == 0){
         document.head.innerHTML += "<link href=\"../style/style.css\" rel=\"stylesheet\" type=\"text/css\" /><script src=\"https://code.jquery.com/jquery-3.4.1.min.js\"></script>";
@@ -97,7 +97,7 @@ function newButton() {
     }
     ++count;
     var inner = "<div id =\"memo" + count + "\">";
-    inner += "<div id=\"divpop\" style=\"left:10px;top:10px;width:300px;height:300px;\">";
+    inner += "<div id=\"divpop\" style=\"left:"+pointX+"px;top:"+pointY+"px;width:300px;height:300px;\">";
     inner += "<table class=\"table\">";
     inner += "<tr>";
     inner += "<td class=\"td\">";
@@ -134,7 +134,7 @@ chrome.runtime.onConnect.addListener((port)=> {
     port.onMessage.addListener((request)=>{
         if(request.connect === 'context_menus'){
             alert("ABC");
-            newButton();
+            newButton(request.gPos.pageX,request.gPos.pageY);
             document.getElementById("memotext").style.color="#000000";
             document.getElementById("memotext").style.fontSize = "14px";
             port.postMessage({result:"success"});
