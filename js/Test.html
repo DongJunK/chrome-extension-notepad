@@ -1,0 +1,121 @@
+<html>
+	<head>
+		<style>
+			#bcolor {
+				background-color :green
+			}
+			#td {
+				background-color : purple
+			}
+			#tr {
+				background-color : brown
+			}
+			#table {
+				background-color : yellow
+			}
+			#state {
+				background-color : red;
+				text-align: right;
+			}
+			#text {
+				margin: 10px;
+			}
+			.img {
+				height:15px;
+				width:15px;
+				float:right;
+				margin-right: 5px;
+			}
+		</style>
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+		<script type='text/javascript'>
+			var count = 0;
+			var img_L = 0;
+			var img_T = 0;
+			var targetObj;
+
+			function getLeft(o){
+				 return parseInt(o.style.left.replace('px', ''));
+			}
+			function getTop(o){
+				 return parseInt(o.style.top.replace('px', ''));
+			}
+
+			// 이미지 움직이기
+			function moveDrag(e){
+				 var e_obj = window.event? window.event : e;
+				 var dmvx = parseInt(e_obj.clientX + img_L);
+				 var dmvy = parseInt(e_obj.clientY + img_T);
+				 targetObj.style.left = dmvx +"px";
+				 targetObj.style.top = dmvy +"px";
+				 return false;
+			}
+
+			// 드래그 시작
+			function startDrag(e, obj){
+				var x = obj.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement;
+				 targetObj = x;
+				 var e_obj = window.event? window.event : e;
+				 img_L = getLeft(x) - e_obj.clientX;
+				 img_T = getTop(x) - e_obj.clientY;
+
+				 document.onmousemove = moveDrag;
+				 document.onmouseup = stopDrag;
+				 if(e_obj.preventDefault)e_obj.preventDefault();
+			}
+
+			// 드래그 멈추기
+			function stopDrag(){
+				 document.onmousemove = null;
+				 document.onmouseup = null;
+			}
+			function newButton() {
+				++count;
+				var inner = "<div id =\"memo" + count + "\">";
+				inner += "<button onclick=\"newButton()\">HELLO</button>";
+				inner += "<div id=\"divpop\" style=\"position:absolute; left:10px;top:10px;z-index:200\" onmousedown=\"startDrag(event, this)\">";
+				inner += "<table width=300 height=400 cellpadding=2 cellspacing=0>";
+				inner += "<tr>";
+				inner += "<td style=\"border:1px #666666 solid\" height=360 align=center bgcolor=white>";
+				inner += "<div id=\"state\">";
+				inner += "<img class=\"img\" src=\"../images/close.png\" alt=\"close\" style=\"cursor:pointer\" onclick=\"closeMemo('#memo" + count + "')\">";
+				inner += "<img class=\"img\" src=\"../images/move.png\" alt=\"move\" style=\"cursor:pointer\" onmousedown=\"startDrag(event, this)\">";
+				inner += "</div>";
+				inner += "<p id=\"text\"> Memo </p>";
+				inner += "<textarea id=\"memotext\" name=\"ourtext\" rows=\"17\" style=\"width:95%;height:85%;resize:none\"></textarea>";
+				inner += "</td>";
+				inner += "</tr>";
+				inner += "</table>";
+				inner += "</div>";
+				inner += "</div>";
+				inner += "</div>";
+				document.body.innerHTML += inner;
+			}
+			function closeMemo(name){
+				$(name).remove();
+			}
+		</script>
+	</head>
+	<body id = "bcolor">
+		<div id ="memo">
+			<button onclick="newButton()">HELLO</button>
+			<div id="divpop" style="position:absolute; left:10px;top:10px;z-index:200"> 
+				<table width=300 height=400 cellpadding=2 cellspacing=0 > 
+					<tr> 
+						<td style="border:1px #666666 solid" height=360 align=center bgcolor=white>  
+							<div id="state">
+								<img class="img" src="../images/close.png" alt="close" style="cursor:pointer" onclick="closeMemo('#memo')">
+								<img class="img" src="../images/move.png" alt="move" style="cursor:pointer" onmousedown="startDrag(event, this)">
+							</div>
+							<p id="text"> Memo </p> 
+							<textarea id="memotext" name="ourtext" rows="17" style="width:95%;height:85%;resize:none"></textarea> 
+						</td> 
+					</tr> 
+				</table> 
+			</div>
+		</div>
+	</body>
+	<script>
+		
+	</script>
+</html>
