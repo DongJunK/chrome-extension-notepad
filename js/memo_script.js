@@ -151,6 +151,8 @@ chrome.runtime.onConnect.addListener((port)=> {
             document.getElementById("memotext").style.color = request.fontColor;
             document.getElementById("memotext").style.fontFamily = request.fontFamily;
             document.getElementById("memotext").style.fontSize = request.fontSize + "px";
+            document.getElementById("memotext").style.backgroundColor = request.backgroundColor;
+
             port.postMessage({result:"success"});
         }
     });

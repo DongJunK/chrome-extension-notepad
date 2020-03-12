@@ -15,8 +15,11 @@ function colorToRgb(fontColor){
         case 'green':
             fontColor = "#008000";
             break;
-        case 'FAB201':
+        case 'yellow':
             fontColor = "#FAD201";
+            break;
+        case 'white':
+            fontColor = "#FFFFFF";
             break;
     }
     return fontColor;
@@ -26,16 +29,18 @@ function colorToRgb(fontColor){
 function connect(){
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         var port = chrome.tabs.connect(tabs[0].id);
-        var select_font_size = document.getElementById("select_font_size");
-        var select_font_family = document.getElementById("select_font_family");
-        var select_font_color = document.getElementById("select_font_color");
-        var fontSize = select_font_size.options[select_font_size.selectedIndex].value;
-        var fontFamily = select_font_family.options[select_font_family.selectedIndex].value;
-        var fontColor = select_font_color.options[select_font_color.selectedIndex].value;
-        
+        var selectFontSize = document.getElementById("selectFontSize");
+        var selectFontFamily = document.getElementById("selectFontFamily");
+        var selectFontColor = document.getElementById("selectFontColor");
+        var fontSize = selectFontSize.options[selectFontSize.selectedIndex].value;
+        var fontFamily = selectFontFamily.options[selectFontFamily.selectedIndex].value;
+        var fontColor = selectFontColor.options[selectFontColor.selectedIndex].value;
+        var backgroundColor = selectBackgroundColor.options[selectBackgroundColor.selectedIndex].value;
+
         fontColor = colorToRgb(fontColor);
+        backgroundColor = colorToRgb(backgroundColor);
         
-        port.postMessage({ connect:"popup", fontSize:fontSize, fontFamily:fontFamily, fontColor:fontColor});
+        port.postMessage({ connect:"popup", fontSize:fontSize, fontFamily:fontFamily, fontColor:fontColor, backgroundColor:backgroundColor});
         port.onMessage.addListener((response) => {
             alert(response.result);
             if(response.result==="success"){
@@ -49,7 +54,7 @@ function connect(){
 
 
 document.addEventListener('DOMContentLoaded',function(){
-    var ok_button = document.getElementById('ok_button');
-    ok_button.addEventListener('click',connect);
+    var okButton = document.getElementById('okButton');
+    okButton.addEventListener('click',connect);
     
 });
