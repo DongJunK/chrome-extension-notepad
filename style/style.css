@@ -1,0 +1,46 @@
+#divpop {
+  width:300;
+  height:300;
+  overflow: hidden;
+  resize: both;
+  min-width: 300px;
+  min-height: 300px;
+  max-width: 600px;
+  max-height: 600px;
+  position:absolute;
+  z-index:200;
+}
+.memotext {
+  width:95%;
+  height:80%;
+  resize: none;
+}
+.table {
+  width:100%; 
+  height:100%;
+  border-spacing: 0px;
+}
+.td {
+  border:1px #666666 solid;
+  text-align:center;
+  background-color:white;
+}
+.title {
+  margin-left: 20px;
+}
+#bcolor {
+  background-color :green
+}
+#state {
+  text-align: right;
+}
+#text {
+  margin: 10px;
+}
+.img {
+  height:15px;
+  width:15px;
+  float:right;
+  margin-right: 5px;
+  cursor:pointer;
+}

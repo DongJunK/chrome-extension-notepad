@@ -1,32 +1,6 @@
 <html>
 	<head>
-		<style>
-			#bcolor {
-				background-color :green
-			}
-			#td {
-				background-color : purple
-			}
-			#tr {
-				background-color : brown
-			}
-			#table {
-				background-color : yellow
-			}
-			#state {
-				background-color : red;
-				text-align: right;
-			}
-			#text {
-				margin: 10px;
-			}
-			.img {
-				height:15px;
-				width:15px;
-				float:right;
-				margin-right: 5px;
-			}
-		</style>
+		<link href="../style/style.css" rel="stylesheet" type="text/css" />
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 		<script type='text/javascript'>
 			var count = 0;
@@ -70,26 +44,28 @@
 				 document.onmouseup = null;
 			}
 			function newButton() {
+				if(count == 0){
+					document.body.innerHTML += "<div id = \"allMemo\"></div>";
+				}
 				++count;
 				var inner = "<div id =\"memo" + count + "\">";
-				inner += "<button onclick=\"newButton()\">HELLO</button>";
-				inner += "<div id=\"divpop\" style=\"position:absolute; left:10px;top:10px;z-index:200\" onmousedown=\"startDrag(event, this)\">";
-				inner += "<table width=300 height=400 cellpadding=2 cellspacing=0>";
+				inner += "<div id=\"divpop\" style=\"left:10px;top:10px;\">";
+				inner += "<table class=\"table\">";
 				inner += "<tr>";
-				inner += "<td style=\"border:1px #666666 solid\" height=360 align=center bgcolor=white>";
+				inner += "<td class=\"td\">";
 				inner += "<div id=\"state\">";
-				inner += "<img class=\"img\" src=\"../images/close.png\" alt=\"close\" style=\"cursor:pointer\" onclick=\"closeMemo('#memo" + count + "')\">";
-				inner += "<img class=\"img\" src=\"../images/move.png\" alt=\"move\" style=\"cursor:pointer\" onmousedown=\"startDrag(event, this)\">";
+				inner += "<img class=\"img\" src=\"../images/close.png\" alt=\"close\" onclick=\"closeMemo('#memo" + count + "')\">";
+				inner += "<img class=\"img\" src=\"../images/move.png\" alt=\"move\" onmousedown=\"startDrag(event, this)\">";
 				inner += "</div>";
-				inner += "<p id=\"text\"> Memo </p>";
-				inner += "<textarea id=\"memotext\" name=\"ourtext\" rows=\"17\" style=\"width:95%;height:85%;resize:none\"></textarea>";
+				inner += "<p class=\"title\"> Memo </p>";
+				inner += "<textarea class=\"memotext\"></textarea>";
 				inner += "</td>";
 				inner += "</tr>";
 				inner += "</table>";
 				inner += "</div>";
 				inner += "</div>";
 				inner += "</div>";
-				document.body.innerHTML += inner;
+				document.getElementById("allMemo").innerHTML += inner;
 			}
 			function closeMemo(name){
 				$(name).remove();
@@ -97,25 +73,6 @@
 		</script>
 	</head>
 	<body id = "bcolor">
-		<div id ="memo">
-			<button onclick="newButton()">HELLO</button>
-			<div id="divpop" style="position:absolute; left:10px;top:10px;z-index:200"> 
-				<table width=300 height=400 cellpadding=2 cellspacing=0 > 
-					<tr> 
-						<td style="border:1px #666666 solid" height=360 align=center bgcolor=white>  
-							<div id="state">
-								<img class="img" src="../images/close.png" alt="close" style="cursor:pointer" onclick="closeMemo('#memo')">
-								<img class="img" src="../images/move.png" alt="move" style="cursor:pointer" onmousedown="startDrag(event, this)">
-							</div>
-							<p id="text"> Memo </p> 
-							<textarea id="memotext" name="ourtext" rows="17" style="width:95%;height:85%;resize:none"></textarea> 
-						</td> 
-					</tr> 
-				</table> 
-			</div>
-		</div>
+		<button onclick="newButton()">HELLO</button>
 	</body>
-	<script>
-		
-	</script>
 </html>
