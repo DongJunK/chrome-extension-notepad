@@ -1,12 +1,63 @@
 <html>
 	<head>
-		<link href="../style/style.css" rel="stylesheet" type="text/css" />
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 		<script type='text/javascript'>
 			var count = 0;
 			var img_L = 0;
 			var img_T = 0;
 			var targetObj;
+
+			function addCss() {
+				var css = "<style>";
+					css += "#divpop {";
+					css += "width:300;";
+					css += "height:300;";
+					css += "overflow: hidden;";
+					css += "resize: both;";
+					css += "min-width: 300px;";
+					css += "min-height: 300px;";
+					css += "max-width: 600px;";
+					css += "max-height: 600px;";
+					css += "position:absolute;";
+					css += "z-index:200;";
+					css += "} ";
+					css += "#memotext {";
+					css += "width:95%;";
+					css += "height:80%;";
+					css += "resize: none;";
+					css += "} ";
+					css += ".table {";
+					css += "width:100%; ";
+					css += "height:100%;";
+					css += "border-spacing: 0px;";
+					css += "} ";
+					css += ".td {";
+					css += "border:1px #666666 solid;";
+					css += "text-align:center;";
+					css += "background-color:white;";
+					css += "} ";
+					css += ".title {";
+					css += "margin-left: 20px;";
+					css += "} ";
+					css += "#bcolor {";
+					css += "background-color :green";
+					css += "} ";
+					css += "#state {";
+					css += "text-align: right;";
+					css += "} ";
+					css += "#text {";
+					css += "margin: 10px;";
+					css += "} ";
+					css += ".img {";
+					css += "height:15px;";
+					css += "width:15px;";
+					css += "float:right;";
+					css += "margin-right: 5px;";
+					css += "cursor:pointer;";
+					css += "} ";
+					css += "</style>";
+				return css;
+			}
 
 			function getLeft(o){
 				 return parseInt(o.style.left.replace('px', ''));
@@ -45,20 +96,21 @@
 			}
 			function newButton() {
 				if(count == 0){
+					document.head.innerHTML += addCss();
 					document.body.innerHTML += "<div id = \"allMemo\"></div>";
 				}
 				++count;
 				var inner = "<div id =\"memo" + count + "\">";
 				inner += "<div id=\"divpop\" style=\"left:10px;top:10px;\">";
 				inner += "<table class=\"table\">";
-				inner += "<tr>";
+				inner += "<tr class=\"tr\">";
 				inner += "<td class=\"td\">";
 				inner += "<div id=\"state\">";
 				inner += "<img class=\"img\" src=\"../images/close.png\" alt=\"close\" onclick=\"closeMemo('#memo" + count + "')\">";
 				inner += "<img class=\"img\" src=\"../images/move.png\" alt=\"move\" onmousedown=\"startDrag(event, this)\">";
 				inner += "</div>";
 				inner += "<p class=\"title\"> Memo </p>";
-				inner += "<textarea class=\"memotext\"></textarea>";
+				inner += "<textarea id=\"memotext\"></textarea>";
 				inner += "</td>";
 				inner += "</tr>";
 				inner += "</table>";
