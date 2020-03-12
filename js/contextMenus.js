@@ -1,5 +1,7 @@
 //Add mouse right menu
-var id = chrome.contextMenus.create({
+
+
+chrome.contextMenus.create({
     "id":"add-memo",
     "title": "Add Memo",
     "contexts":["all"]
