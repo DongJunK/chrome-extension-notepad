@@ -51,8 +51,6 @@ function connect(){
     window.close();
 }
 
-
-
 document.addEventListener('DOMContentLoaded',function(){
     var okButton = document.getElementById('okButton');
     okButton.addEventListener('click',connect);
