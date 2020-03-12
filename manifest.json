@@ -5,7 +5,8 @@
     "permissions": [
         "contextMenus",
         "tabs",
-        "activeTab"
+        "activeTab",
+        "<all_urls>"
     ],
     "background": {
         "scripts": ["js/contextMenus.js"],
@@ -18,14 +19,14 @@
         }
     ],
     "browser_action": {
-        "default_popup":"html/popup.html",
         "default_title": "Chrome NotePad",
         "default_icon": {
           "16": "images/note_icon16.png",
           "32": "images/note_icon32.png",
           "64": "images/note_icon64.png",
           "128": "images/note_icon128.png"
-        }
+        },
+        "default_popup":"html/popup.html"
     },
     "icons": {
         "16": "images/note_icon16.png",
