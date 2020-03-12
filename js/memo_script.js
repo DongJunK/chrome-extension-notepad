@@ -88,10 +88,27 @@ function addCss() {
     return css;
 }
 
+function moveFunction(){
+    var moveFunc = "var img_L = 0;var img_T = 0;var targetObj;";
+    moveFunc += "function getLeft(o){return parseInt(o.style.left.replace('px', ''));}";
+    moveFunc += "function getTop(o){return parseInt(o.style.top.replace('px', ''));}";
+    moveFunc += "function moveDrag(e){var e_obj = window.event? window.event : e;var dmvx = parseInt(e_obj.clientX + img_L);var dmvy = parseInt(e_obj.clientY + img_T);targetObj.style.left = dmvx +\"px\";targetObj.style.top = dmvy +\"px\";return false;};";
+    moveFunc += "function startDrag(e, obj){var x = obj.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement;targetObj = x;var e_obj = window.event? window.event : e;img_L = getLeft(x) - e_obj.clientX;img_T = getTop(x) - e_obj.clientY;document.onmousemove = moveDrag;document.onmouseup = stopDrag;if(e_obj.preventDefault)e_obj.preventDefault();}";
+    moveFunc += "function stopDrag(){document.onmousemove = null;document.onmouseup = null;}";
+    return moveFunc;
+}
+
 function newButton(pointX, pointY) {
-    alert(count);
     if(count == 0){
-        document.head.innerHTML += "<link href=\"../style/style.css\" rel=\"stylesheet\" type=\"text/css\" /><script src=\"https://code.jquery.com/jquery-3.4.1.min.js\"></script>";
+        var jqueryScript = document.createElement("script");
+        jqueryScript.setAttribute("src","https://code.jquery.com/jquery-3.4.1.min.js");
+        document.head.appendChild(jqueryScript);
+
+        var moveFunctionScript = document.createElement("script");
+        moveFunctionScript.setAttribute("type","text/javascript");
+        moveFunctionScript.innerHTML = moveFunction();
+        document.head.appendChild(moveFunctionScript);
+        
         document.head.innerHTML += addCss();
         document.body.innerHTML += "<div id = \"allMemo\"></div>";
     }
@@ -102,7 +119,7 @@ function newButton(pointX, pointY) {
     inner += "<tr>";
     inner += "<td class=\"td\">";
     inner += "<div id=\"state\">";
-    inner += "<img class=\"img\" src=\"https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2FZ1poB%2FbtqCB89D0pX%2FwEPiFYyksN2TtPZWOFQyQk%2Fimg.png\" alt=\"close\" onclick=\"closeMemo('#memo" + count + "')\">";
+    inner += "<img class=\"img\" src=\"https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2FZ1poB%2FbtqCB89D0pX%2FwEPiFYyksN2TtPZWOFQyQk%2Fimg.png\" alt=\"close\" onclick=\"$('#memo" + count + "').remove()\">";
     inner += "<img class=\"img\" src=\"https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2FXr0hx%2FbtqCDkowjR9%2FhH6DySs67UvbDOurTFy7rk%2Fimg.png\" alt=\"move\" onmousedown=\"startDrag(event, this)\">";
     inner += "</div>";
     inner += "<p class=\"title\"> Memo </p>";
@@ -114,11 +131,6 @@ function newButton(pointX, pointY) {
     inner += "</div>";
     inner += "</div>";
     document.getElementById("allMemo").innerHTML += inner;
-}
-
-function closeMemo(name){
-    alert("CCC");
-    $(name).remove();
 }
 
 // monuse right button menu location listener
@@ -133,7 +145,6 @@ document.addEventListener('mouseup', function (mousePos) {
 chrome.runtime.onConnect.addListener((port)=> {
     port.onMessage.addListener((request)=>{
         if(request.connect === 'context_menus'){
-            alert("ABC");
             newButton(request.gPos.pageX,request.gPos.pageY);
             document.getElementById("memotext").style.color="#000000";
             document.getElementById("memotext").style.fontSize = "14px";
@@ -148,3 +159,4 @@ chrome.runtime.onConnect.addListener((port)=> {
         }
     });
 });
+
