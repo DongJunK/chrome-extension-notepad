@@ -43,63 +43,53 @@ function stopDrag(){
 
 function addCss() {
     var css = "<style>";
-        css += "#divpop {";
-        css += "width:300;";
-        css += "height:300;";
-        css += "overflow: hidden;";
-        css += "resize: both;";
-        css += "min-width: 300px;";
-        css += "min-height: 300px;";
-        css += "max-width: 600px;";
-        css += "max-height: 600px;";
-        css += "position:absolute;";
-        css += "z-index:200;";
-        css += "} ";
-        css += "#memotext {";
-        css += "width:95%;";
-        css += "height:80%;";
-        css += "resize: none;";
-        css += "} ";
-        css += ".table {";
-        css += "width:100%; ";
-        css += "height:100%;";
-        css += "border-spacing: 0px;";
-        css += "} ";
-        css += ".tr {";
-        css += "width: 100%;";
-        css += "height: 100%;";
-        css += "} ";
-        css += ".td {";
-        css += "width: 100%;";
-        css += "height: 100%;";
-        css += "border:1px #666666 solid;";
-        css += "text-align:center;";
-        css += "background-color:white;";
-        css += "} ";
-        css += ".title {";
-        css += "margin-left: 20px;";
-        css += "} ";
-        css += "#bcolor {";
-        css += "background-color :green";
-        css += "} ";
-        css += "#state {";
-        css += "text-align: right;";
-        css += "} ";
-        css += "#text {";
-        css += "margin: 10px;";
-        css += "} ";
-        css += ".img {";
-        css += "height:15px;";
-        css += "width:15px;";
-        css += "float:right;";
-        css += "margin-right: 5px;";
-        css += "cursor:pointer;";
-        css += "} ";
-        css += "</style>";
+    css += "#divpop {";
+    css += "overflow: hidden;";
+    css += "resize: both;";
+    css += "min-width: 300px;";
+    css += "min-height: 300px;";
+    css += "max-width: 600px;";
+    css += "max-height: 600px;";
+    css += "position:absolute;";
+    css += "z-index:200;";
+    css += "} ";
+    css += "#memotext {";
+    css += "width:95%;";
+    css += "height:80%;";
+    css += "resize: none;";
+    css += "} ";
+    css += ".table {";
+    css += "width:100%; ";
+    css += "height:100%;";
+    css += "border-spacing: 0px;";
+    css += "} ";
+    css += ".td {";
+    css += "border:1px #666666 solid;";
+    css += "text-align:center;";
+    css += "background-color:white;";
+    css += "} ";
+    css += ".title {";
+    css += "margin-left: 20px;";
+    css += "} ";
+    css += "#state {";
+    css += "text-align: right;";
+    css += "} ";
+    css += "#text {";
+    css += "margin: 10px;";
+    css += "} ";
+    css += ".img {";
+    css += "height:15px;";
+    css += "width:15px;";
+    css += "float:right;";
+    css += "margin-right: 5px;";
+    css += "cursor:pointer;";
+    css += "} ";
+    css += "</style>";
     return css;
 }
 
 function newButton() {
+    alert(count);
     if(count == 0){
         document.head.innerHTML += "<link href=\"../style/style.css\" rel=\"stylesheet\" type=\"text/css\" /><script src=\"https://code.jquery.com/jquery-3.4.1.min.js\"></script>";
         document.head.innerHTML += addCss();
@@ -107,7 +97,7 @@ function newButton() {
     }
     ++count;
     var inner = "<div id =\"memo" + count + "\">";
-    inner += "<div id=\"divpop\" style=\"left:10px;top:10px;\">";
+    inner += "<div id=\"divpop\" style=\"left:10px;top:10px;width:300px;height:300px;\">";
     inner += "<table class=\"table\">";
     inner += "<tr>";
     inner += "<td class=\"td\">";
@@ -127,6 +117,7 @@ function newButton() {
 }
 
 function closeMemo(name){
+    alert("CCC");
     $(name).remove();
 }
 
