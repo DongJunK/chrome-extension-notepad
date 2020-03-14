@@ -1,5 +1,4 @@
-# chrome extension
-# 이름 : notepad
+# chrome extension - notepad
 
 ## 설명
 웹 상에서 메모를 하고 싶을 때 간편하게 어느 웹사이트에서든지 메모장을 생성할 수 있습니다.  
@@ -16,4 +15,4 @@ AddMemo를 클릭하면 메모장이 생성됩니다.
 ---
 웹스토어에 notepad 게시 진행중이므로 게시가 완료되면 웹스토어에서 notepad를 검색하셔서 확장프로그램을 추가할 수 있습니다.
   
-made by 김동준, 이제성
+<b>made by 김동준, 이제성</b>
