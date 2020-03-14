@@ -1,4 +1,5 @@
-# chrome extension 이름 : notepad
+# chrome extension
+# 이름 : notepad
 
 ## 설명
 웹 상에서 메모를 하고 싶을 때 간편하게 어느 웹사이트에서든지 메모장을 생성할 수 있습니다.  
